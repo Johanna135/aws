@@ -46,6 +46,8 @@ async function showStations(url) {
             return L.marker(latlng, {
                 icon: L.icon({
                     iconUrl: "icons/wifi.png",
+                    iconAnchor: [16, 37],
+                    popupAnchor: [0, -37]
                 })
             });
         },
