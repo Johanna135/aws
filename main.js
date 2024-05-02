@@ -36,6 +36,15 @@ L.control.scale({
     imperial: false,
 }).addTo(map);
 
+// in der Klammer nach getColor da kann ich der Funktion was übergeben mit dem sie arbeiten kann()
+function getColor(value, ramp) {
+    for (let rule of ramp) {
+        if (value >= rule.min && value < rule.max) {
+            return rule.color;
+        }
+    }
+}
+
 function showTemperature(geojson) {
     L.geoJSON(geojson, {
         filter: function (feature) { //da gehts drum zu filtern wo keine werte angegeben sind, && = logisches und
