@@ -68,7 +68,7 @@ function showTemperature(geojson) {
 
 function showWind(geojson) {
     L.geoJSON(geojson, {
-        filter: function (feature) { //da gehts drum zu filtern wo keine werte angegeben sind, && = logisches und
+        filter: function (feature) {
             if (feature.properties.WG > 0 && feature.properties.WG < 1000) {
                 return true;
             }
@@ -77,9 +77,10 @@ function showWind(geojson) {
             let color = getColor(feature.properties.WG, COLORS.wind);
             return L.marker(latlng, {
                 icon: L.divIcon({
-                    className: "aws-div-icon",
-                    html: `<span style="background-color:${color};">${feature.properties.WG.toFixed(1)}</span>`
-                })
+                    className: "aws-div-icon-wind",
+                    html: `<span title="${feature.properties.WG.toFixed(1)} km/h" ><i 
+                    style="transform:rotate(${feature.properties.WR}deg);color:${color}" class="fa-solid fa-circle-arrow-down"></i></span>`
+                }) // title funktion macht dass wenn man mit der Maus drüber fahrt dass da was angezeigt wird
             })
         }
     }).addTo(themaLayer.wind);
