@@ -51,7 +51,7 @@ footer nav {
     display: inline-block;
 }
 
-/*der style soll für aws-div-icon angewendet werden und das steht bei uns im span*/
+/*der style soll für aws-div-icon angewendet werden und das steht bei uns im span, mit translate objekt in x und y verschieben*/
 .aws-div-icon span {
     border: 1px solid silver;
     font-size: 1.25em;
@@ -61,5 +61,8 @@ footer nav {
         -1px -1px 0 white,
         -1px -1px 0 white,
         1px 1px 0 white,
-        1px 1px 0 white,
+        1px 1px 0 white;
+
+    display: inline-block;
+    transform: translate(-30%, -50%);
 }
