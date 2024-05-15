@@ -107,26 +107,6 @@ function showSnow(geojson) {
     }).addTo(themaLayer.snow);
 }
 
-// // Schneehöhen-Funktion
-// function showSnowHeight(geojson) {
-//     L.geoJSON(geojson, {
-//         filter: function (feature) {
-//             //feature.properties.LT; wenn man am Ende der Funktion sagt: "return True", dann wird er angezeigt, sonst nicht
-//             if (feature.properties.HS > 0 && feature.properties.HS < 700) {
-//                 return true;
-//             }
-//         },
-//         pointToLayer: function (feature, latlng) {
-//             let color = getColor(feature.properties.HS, COLORS.snowheight); //für jede Temp. steht jetzt Farbe da
-//             return L.marker(latlng, {
-//                 icon: L.divIcon({
-//                     className: "aws-div-icon-snowheight",
-//                     html: `<span style="background-color:${color};"> ${feature.properties.HS.toFixed(1)}</span>`,
-//                 })
-//             })
-//         }
-//     }).addTo(themaLayer.snowheight);
-// }
 
 // GeoJSON der Wetterstationen laden
 async function showStations(url) {
