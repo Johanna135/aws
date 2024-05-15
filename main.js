@@ -13,10 +13,10 @@ let map = L.map("map", {
 
 // thematische Layer
 let themaLayer = {
-    stations: L.featureGroup().addTo(map),
-    temperature: L.featureGroup().addTo(map), //Temperaturlayer definieren
-    wind: L.featureGroup().addTo(map),
-    snow: L.featureGroup().addTo(map),
+    stations: L.featureGroup(),//.addTo(map),
+    temperature: L.featureGroup(),//.addTo(map), //Temperaturlayer definieren
+    wind: L.featureGroup(),//.addTo(map), 
+    snow: L.featureGroup().addTo(map), //die anderen Layer sind auch ohne .addTo(map) in der Karte drinnen, sie müssen halt aktiv im Menü angeklickt werden
 }
 
 // Hintergrundlayer
