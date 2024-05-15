@@ -80,3 +80,18 @@ footer nav {
     display: inline-block;
     transform: translate(-30%, -50%);
 }
+
+.aws-div-icon-snow span {
+    border: 1px solid silver;
+    font-size: 1.25em;
+    font-weight: bold;
+    padding: 0.3em;
+    text-shadow:
+        -1px -1px 0 white,
+        -1px -1px 0 white,
+        1px 1px 0 white,
+        1px 1px 0 white;
+
+    display: inline-block;
+    transform: translate(-30%, -50%);
+}

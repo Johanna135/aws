@@ -16,6 +16,7 @@ let themaLayer = {
     stations: L.featureGroup().addTo(map),
     temperature: L.featureGroup().addTo(map), //Temperaturlayer definieren
     wind: L.featureGroup().addTo(map),
+    snow: L.featureGroup().addTo(map),
 }
 
 // Hintergrundlayer
@@ -31,6 +32,7 @@ L.control.layers({
     "Wetterstationen": themaLayer.stations,
     "Temperatur (°C)": themaLayer.temperature, //Temperatur in die Layercontrol dazu getan
     "Wind (km/h)": themaLayer.wind,
+    "Schneehöhe (cm)": themaLayer.snow,
 }).addTo(map);
 
 // Maßstab
@@ -86,6 +88,46 @@ function showWind(geojson) {
     }).addTo(themaLayer.wind);
 }
 
+function showSnow(geojson) {
+    L.geoJSON(geojson, {
+        filter: function (feature) {
+            if (feature.properties.HS > 0 && feature.properties.HS < 1000) {
+                return true;
+            }
+        },
+        pointToLayer: function (feature, latlng) {
+            let color = getColor(feature.properties.HS, COLORS.snow);
+            return L.marker(latlng, {
+                icon: L.divIcon({
+                    className: "aws-div-icon-snow",
+                    html: `<span style="background-color:${color};"> ${feature.properties.HS.toFixed(1)}</span>`,
+                })
+            })
+        }
+    }).addTo(themaLayer.snow);
+}
+
+// // Schneehöhen-Funktion
+// function showSnowHeight(geojson) {
+//     L.geoJSON(geojson, {
+//         filter: function (feature) {
+//             //feature.properties.LT; wenn man am Ende der Funktion sagt: "return True", dann wird er angezeigt, sonst nicht
+//             if (feature.properties.HS > 0 && feature.properties.HS < 700) {
+//                 return true;
+//             }
+//         },
+//         pointToLayer: function (feature, latlng) {
+//             let color = getColor(feature.properties.HS, COLORS.snowheight); //für jede Temp. steht jetzt Farbe da
+//             return L.marker(latlng, {
+//                 icon: L.divIcon({
+//                     className: "aws-div-icon-snowheight",
+//                     html: `<span style="background-color:${color};"> ${feature.properties.HS.toFixed(1)}</span>`,
+//                 })
+//             })
+//         }
+//     }).addTo(themaLayer.snowheight);
+// }
+
 // GeoJSON der Wetterstationen laden
 async function showStations(url) {
     let response = await fetch(url);
@@ -120,6 +162,7 @@ async function showStations(url) {
     }).addTo(themaLayer.stations);
     showTemperature(geojson);
     showWind(geojson);
+    showSnow(geojson);
 
 }
 showStations("https://static.avalanche.report/weather_stations/stations.geojson");
