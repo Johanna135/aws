@@ -35,6 +35,18 @@ L.control.layers({
     "Schneehöhe (cm)": themaLayer.snow,
 }).addTo(map);
 
+// Change default options
+L.control.rainviewer({
+    position: 'bottomleft',
+    nextButtonText: '>',
+    playStopButtonText: 'Play/Stop',
+    prevButtonText: '<',
+    positionSliderLabelText: "Hour:",
+    opacitySliderLabelText: "Opacity:",
+    animationInterval: 500,
+    opacity: 0.5
+}).addTo(map);
+
 // Maßstab
 L.control.scale({
     imperial: false,
@@ -106,7 +118,6 @@ function showSnow(geojson) {
         }
     }).addTo(themaLayer.snow);
 }
-
 
 // GeoJSON der Wetterstationen laden
 async function showStations(url) {
